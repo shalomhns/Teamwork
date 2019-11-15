@@ -12,21 +12,21 @@ userType VARCHAR DEFAULT 'employee',
 createdOn TIMESTAMP DEFAULT NOW()
 );
 
-INSERT INTO users (insert into users (firstName, lastName, Email, Password, Gender, JobRole, Dob, Department)
-values ('Sam', 'Ade', 'ade@sample.com', 'ade1234', 'Male', 'Secretary', 'Management', '16-04-99');
+INSERT INTO users (firstName, lastName, Email, Password, Gender, JobRole, Dob, Department, userType)
+values ('Sam', 'Ade', 'ade@sample.com', 'ade1234', 'Male', 'Secretary', '16-04-99','Management', 'employee' );
 
-insert into users (firstName, lastName, Email, Password, Gender, JobRole, Dob, Department)
-values ('Sami', 'Adei', 'adei@sample.com', 'ade2234', 'Male', 'Secretary', 'Management', '16-04-89');
+insert into users (firstName, lastName, Email, Password, Gender, JobRole, Dob, Department, userType)
+values ('Sami', 'Adei', 'adei@sample.com', 'ade2234', 'Male', 'Secretary', '16-04-89','Management', 'employee');
 
-insert into users (firstName, lastName, Email, Password, Gender, JobRole, Dob, Department)
-values ('Same', 'Adel', 'sade@sample.com', 'aqe1234', 'Male', 'Driver', 'Works', '16-06-90');
+insert into users (firstName, lastName, Email, Password, Gender, JobRole, Dob, Department, userType)
+values ('Same', 'Adel', 'sade@sample.com', 'aqe1234', 'Male', 'Driver', '16-06-90', 'Works', 'employee');
 
 CREATE TABLE tweets (
-TweetID UUID PRIMARY KEY,
+TweetId SERIAL PRIMARY KEY,
 title VARCHAR NOT NULL,
 article VARCHAR,
 imageUrl VARCHAR,
-authorId UUID REFERENCES users(userId) ON DELETE CASCADE,
+authorId SERIAL REFERENCES users(userId) ON DELETE CASCADE,
 tag VARCHAR NOT NULL,
 inapropriate VARCHAR DEFAULT 'no',
 createdOn TIMESTAMP DEFAULT NOW()

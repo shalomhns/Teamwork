@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const queries = require('./queries');
 
-// set your env variable CLOUDINARY_URL or set the following configuration
+// seting env variable CLOUDINARY_URL or set the following configuration
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.API_KEY,

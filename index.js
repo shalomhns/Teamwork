@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = express();
 const db = require('./queries');
+
+const app = express();
+
 
 
 //CORS
@@ -24,17 +26,21 @@ app.get('/', (request, response) => {
     response.json({ info: 'Teamwork API' })
   });
 
-app.get('/api/v1/user', db.getUsers);
 
-app.get('/api/v1/user/:id', db.getUserById);
 
-app.post('/api/v1/user', db.createUser);
+app.get('/api/v1/users', db.getUsers);
 
-app.put('/api/v1/user/:id', db.updateUser);
+app.get('/api/v1/users/:id', db.getUserById);
 
-app.delete('/api/vi/user/:id', db.deleteUser);
+app.post('/api/v1/users', db.createUser);
+
+app.put('/api/v1/users/:id', db.updateUser);
+
+app.delete('/api/vi/users/:id', db.deleteUser);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
   });
+
+ 

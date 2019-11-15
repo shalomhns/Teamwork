@@ -42,9 +42,9 @@ const getUserById = (request, response) => {
    //Post a new User
 
    const createUser = (request, response) => {
-    const { firstName, lastName, Email, Password, Gender, Jobrole, Department, Address } = request.body
+    const { firstName, lastName, Email, Password, Gender, Jobrole, Dob, Department, userType } = request.body
   
-    pool.query('INSERT INTO users (firstName, lastName, Email, Password, Gender, Jobrole, Department, Address) VALUES ($1, $2, ...)', [firstName, lastName, Email, Password, Gender, Jobrole, Department, Address], (error, results) => {
+    pool.query('INSERT INTO users (firstName, lastName, Email, Password, Gender, Jobrole, Dob, Department, userType) VALUES ($1, $2, ...)', [firstName, lastName, Email, Password, Gender, Jobrole, Department, Address], (error, results) => {
       if (error) {
         throw error
       }
@@ -59,8 +59,8 @@ const getUserById = (request, response) => {
     const { firstName, lastName, Email, Password, Gender, Jobrole, Department, Address } = request.body
   
     pool.query(
-      'UPDATE user SET firstName = $1, lastName =$2, Email = $3, Password = $4, Gender = $5, Jobrole = $6, Department = $7, Address = $8 WHERE id = $9',
-      [firstName, lastName, Email, Password, Gender, Jobrole, Department, Address, id],
+      'UPDATE user SET firstName = $1, lastName =$2, Email = $3, Password = $4, Gender = $5, Jobrole = $6, Dob =$7, Department = $8, userType =$9  WHERE id = $9',
+      [firstName, lastName, Email, Password, Gender, Jobrole, Dob, Department, userType, userId],
       (error, results) => {
         if (error) {
           throw error
