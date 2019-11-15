@@ -1,12 +1,18 @@
 // connecting to Database
 
-const Pool = require('pg').Pool
+const Pool = require('pg').Pool;
+
 const pool = new Pool({
   user: 'shalom',
   host: 'localhost',
   database: 'api',
   password: 'skylimit',
   port: 5432,
+});
+
+
+pool.on('connect', () => {
+  console.log('connected to the db');
 });
 
 //creating routes
@@ -36,13 +42,13 @@ const getUserById = (request, response) => {
    //Post a new User
 
    const createUser = (request, response) => {
-    const { firstName, lastName, Email, Password, Gender, Jobrole, Department, Address } = request.body
+    const { firstName, lastName, Email, Password, Gender, Jobrole, Dob, Department, userType } = request.body
   
-    pool.query('INSERT INTO users (firstName, lastName, Email, Password, Gender, Jobrole, Department, Address) VALUES ($1, $2, ...)', [firstName, lastName, Email, Password, Gender, Jobrole, Department, Address], (error, results) => {
+    pool.query('INSERT INTO users (firstName, lastName, Email, Password, Gender, Jobrole, Dob, Department, userType) VALUES ($1, $2, ...)', [firstName, lastName, Email, Password, Gender, Jobrole, Department, Address], (error, results) => {
       if (error) {
         throw error
       }
-      response.status(201).send(`User added with ID: ${result.insertId}`)
+      response.status(201).send(`Users added with ID: ${results.insertId}`)
     });
   }
 
@@ -53,8 +59,8 @@ const getUserById = (request, response) => {
     const { firstName, lastName, Email, Password, Gender, Jobrole, Department, Address } = request.body
   
     pool.query(
-      'UPDATE users SET firstName = $1, lastName =$2, Email = $3, Password = $4, Gender = $5, Jobrole = $6, Department = $7, Address = $8 WHERE id = $9',
-      [firstName, lastName, Email, Password, Gender, Jobrole, Department, Address, id],
+      'UPDATE user SET firstName = $1, lastName =$2, Email = $3, Password = $4, Gender = $5, Jobrole = $6, Dob =$7, Department = $8, userType =$9  WHERE id = $9',
+      [firstName, lastName, Email, Password, Gender, Jobrole, Dob, Department, userType, userId],
       (error, results) => {
         if (error) {
           throw error
@@ -73,7 +79,7 @@ const getUserById = (request, response) => {
       if (error) {
         throw error
       }
-      response.status(200).send(`User deleted with ID: ${id}`)
+      response.status(200).send(`Users deleted with ID: ${id}`)
     });
   }
 

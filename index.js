@@ -1,9 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = express();
 const db = require('./queries');
-const port = 3000
 
+const app = express();
+
+
+
+//CORS
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
+  );
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  next();
+});
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -11,19 +23,24 @@ app.use(
   })
 );
 app.get('/', (request, response) => {
-    response.json({ info: 'Node.js, Express, and Postgres API' })
+    response.json({ info: 'Teamwork API' })
   });
 
-app.get('/users', db.getUsers);
 
-app.get('/users/:id', db.getUserById);
 
-app.post('/users', db.createUser);
+app.get('/api/v1/users', db.getUsers);
 
-app.put('/users/:id', db.updateUser);
+app.get('/api/v1/users/:id', db.getUserById);
 
-app.delete('/users/:id', db.deleteUser);
+app.post('/api/v1/users', db.createUser);
 
-  app.listen(port, () => {
+app.put('/api/v1/users/:id', db.updateUser);
+
+app.delete('/api/vi/users/:id', db.deleteUser);
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
     console.log(`App running on port ${port}.`)
   });
+
+ 
