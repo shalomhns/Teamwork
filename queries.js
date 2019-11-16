@@ -20,7 +20,7 @@ pool.on('connect', () => {
 //get all users
 
 const getUsers = (request, response) => {
-    pool.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
+    pool.query('SELECT * FROM users ORDER BY userId ASC', (error, results) => {
       if (error) {
         throw error
       }
@@ -32,7 +32,7 @@ const getUsers = (request, response) => {
 const getUserById = (request, response) => {
     const id = parseInt(request.params.id)
   
-    pool.query('SELECT * FROM users WHERE id = $1', [id], (error, results) => {
+    pool.query('SELECT * FROM users WHERE userId = $1', [id], (error, results) => {
       if (error) {
         throw error
       }
@@ -75,7 +75,7 @@ const getUserById = (request, response) => {
   const deleteUser = (request, response) => {
     const id = parseInt(request.params.id)
   
-    pool.query('DELETE FROM users WHERE id = $1', [id], (error, results) => {
+    pool.query('DELETE FROM users WHERE userId = $1', [id], (error, results) => {
       if (error) {
         throw error
       }

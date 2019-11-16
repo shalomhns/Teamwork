@@ -13,13 +13,13 @@ createdOn TIMESTAMP DEFAULT NOW()
 );
 
 INSERT INTO users (firstName, lastName, Email, Password, Gender, JobRole, Dob, Department, userType)
-values ('Sam', 'Ade', 'ade@sample.com', 'ade1234', 'Male', 'Secretary', '16-04-99','Management', 'employee' );
+values ('Sam', 'Ade', 'ade@sample.com', 'ade1234', 'Male', 'Secretary', '04-16-99','Management', 'employee' );
 
 insert into users (firstName, lastName, Email, Password, Gender, JobRole, Dob, Department, userType)
-values ('Sami', 'Adei', 'adei@sample.com', 'ade2234', 'Male', 'Secretary', '16-04-89','Management', 'employee');
+values ('Sami', 'Adei', 'adei@sample.com', 'ade2234', 'Male', 'Secretary', '06-04-89','Management', 'employee');
 
 insert into users (firstName, lastName, Email, Password, Gender, JobRole, Dob, Department, userType)
-values ('Same', 'Adel', 'sade@sample.com', 'aqe1234', 'Male', 'Driver', '16-06-90', 'Works', 'employee');
+values ('Same', 'Adel', 'sade@sample.com', 'aqe1234', 'Male', 'Driver', '07-06-90', 'Works', 'employee');
 
 CREATE TABLE tweets (
 TweetId SERIAL PRIMARY KEY,
@@ -35,8 +35,8 @@ createdOn TIMESTAMP DEFAULT NOW()
 CREATE TABLE comments (
 commentId SERIAL PRIMARY KEY,
 comment VARCHAR NOT NULL,
-authorId UUID REFERENCES users(userId) ON DELETE CASCADE,
+authorId SERIAL REFERENCES users(userId) ON DELETE CASCADE,
 inapropriate VARCHAR DEFAULT 'no',
-postId UUID REFERENCES posts(postId) ON DELETE CASCADE,
+postId SERIAL REFERENCES tweets(tweetId) ON DELETE CASCADE,
 createdOn TIMESTAMP DEFAULT NOW()
 );
